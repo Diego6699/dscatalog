@@ -36,7 +36,7 @@ public class AlunoService {
 		return new AlunoDTO(entity);
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public AlunoDTO update(Long id, AlunoDTO dto) {
 		Aluno entity = repository.getReferenceById(id);
 		copyDtoToEntity(dto, entity);
