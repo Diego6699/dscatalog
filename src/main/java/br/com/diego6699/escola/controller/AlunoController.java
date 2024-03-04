@@ -40,16 +40,16 @@ public class AlunoController {
 	
 	@PostMapping
 	public ResponseEntity<AlunoDTO> insert(@RequestBody AlunoDTO dto) {
-		AlunoDTO newDto = service.insert(dto);
+		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(newDto.getId()).toUri();
-		return ResponseEntity.created(uri).body(newDto);
+				.buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<AlunoDTO> update(@PathVariable(name = "id") Long id, @RequestBody AlunoDTO dto) {
-		AlunoDTO newDto = service.update(id, dto);
-		return ResponseEntity.ok().body(newDto);
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping(value = "/{id}")
