@@ -26,10 +26,7 @@ public class Aluno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_aluno_professor", joinColumns = @JoinColumn(name = "aluno_id"), inverseJoinColumns = @JoinColumn(name = "professor_id"))
-	Set<Professor> professores = new HashSet<>();
-
+	
 	public Aluno() {
 		super();
 	}
@@ -55,11 +52,6 @@ public class Aluno implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Set<Professor> getProfessores() {
-		return professores;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

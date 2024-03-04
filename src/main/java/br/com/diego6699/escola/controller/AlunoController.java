@@ -33,7 +33,7 @@ public class AlunoController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<AlunoDTO> findById(@PathVariable Long id) {
+	public ResponseEntity<AlunoDTO> findById(@PathVariable(name = "id") Long id) {
 		AlunoDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
@@ -47,13 +47,13 @@ public class AlunoController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<AlunoDTO> update(@PathVariable Long id, @RequestBody AlunoDTO dto) {
+	public ResponseEntity<AlunoDTO> update(@PathVariable(name = "id") Long id, @RequestBody AlunoDTO dto) {
 		AlunoDTO newDto = service.update(id, dto);
 		return ResponseEntity.ok().body(newDto);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
+	public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
