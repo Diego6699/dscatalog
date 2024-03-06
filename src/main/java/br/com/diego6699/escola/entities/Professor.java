@@ -24,9 +24,9 @@ public class Professor implements Serializable {
 	private Long id;
 	private String name;
 
-	@ManyToMany(mappedBy = "professores") 
+	@ManyToMany(mappedBy = "professores")
 	private Set<Aluno> alunos = new HashSet<>();
-	
+
 	public Professor() {
 		super();
 	}
@@ -53,7 +53,9 @@ public class Professor implements Serializable {
 		this.name = name;
 	}
 
-
+	public Set<Aluno> getAlunos() {
+		return alunos;
+	}
 
 	@Override
 	public int hashCode() {

@@ -1,8 +1,11 @@
 package br.com.diego6699.escola.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import br.com.diego6699.escola.entities.Aluno;
+import br.com.diego6699.escola.entities.Professor;
 
 public class AlunoDTO implements Serializable {
 
@@ -13,6 +16,7 @@ public class AlunoDTO implements Serializable {
 
 	private Long id;
 	private String name;
+	private Set<ProfessorDTO> professores = new HashSet<ProfessorDTO>();
 
 	public AlunoDTO() {
 		super();
@@ -29,8 +33,12 @@ public class AlunoDTO implements Serializable {
 	public AlunoDTO(Aluno aluno) {
 		this(aluno.getId(), aluno.getName());
 	}
-
-
+	// response aluno e professores
+	public AlunoDTO(Aluno aluno, Set<Professor> professores)
+	{
+		this(aluno.getId(), aluno.getName());
+		professores.forEach(p -> this.professores.add(new ProfessorDTO(p)));
+	}
 	public Long getId() {
 		return id;
 	}
@@ -47,4 +55,7 @@ public class AlunoDTO implements Serializable {
 		this.name = name;
 	}
 
+	public Set<ProfessorDTO> getProfessores() {
+		return professores;
+	}
 }

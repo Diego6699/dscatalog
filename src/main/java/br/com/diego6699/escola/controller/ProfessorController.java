@@ -20,7 +20,7 @@ import br.com.diego6699.escola.dto.ProfessorDTO;
 import br.com.diego6699.escola.service.ProfessorService;
 
 @RestController
-@RequestMapping(value = "/Professors")
+@RequestMapping(value = "/professores")
 public class ProfessorController {
 
 	@Autowired

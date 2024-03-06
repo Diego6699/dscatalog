@@ -59,7 +59,10 @@ public class Aluno implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	public Set<Professor> getProfessores() {
+		return professores;
+	}
 
 	@Override
 	public int hashCode() {

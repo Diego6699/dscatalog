@@ -7,14 +7,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.diego6699.escola.dto.AlunoDTO;
+import br.com.diego6699.escola.dto.ProfessorDTO;
 import br.com.diego6699.escola.entities.Aluno;
+import br.com.diego6699.escola.entities.Professor;
 import br.com.diego6699.escola.repository.AlunoRepository;
+import br.com.diego6699.escola.repository.ProfessorRepository;
 
 @Service
 public class AlunoService {
 
 	@Autowired
 	private AlunoRepository repository;
+
+	@Autowired
+	private ProfessorRepository professorRepository;
 
 	@Transactional(readOnly = true)
 	public Page<AlunoDTO> findAllPaged(Pageable pageable) {
@@ -25,7 +31,7 @@ public class AlunoService {
 	@Transactional(readOnly = true)
 	public AlunoDTO findById(Long id) {
 		Aluno entity = repository.getReferenceById(id);
-		return new AlunoDTO(entity);
+		return new AlunoDTO(entity, entity.getProfessores());
 	}
 
 	@Transactional
@@ -52,7 +58,12 @@ public class AlunoService {
 
 	private void copyDtoToEntity(AlunoDTO dto, Aluno entity) {
 		entity.setName(dto.getName());
-
+		
+		entity.getProfessores().clear();
+		for (ProfessorDTO professorDTO : dto.getProfessores()) {
+			Professor professor = this.professorRepository.getReferenceById(professorDTO.getId());
+			entity.getProfessores().add(professor);
+		}
 	}
 
 }
