@@ -9,14 +9,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_aluno")
-public class Aluno implements Serializable {
+@Table(name = "tb_professor")
+public class Professor implements Serializable {
 	/**
 	 * 
 	 */
@@ -26,19 +24,14 @@ public class Aluno implements Serializable {
 	private Long id;
 	private String name;
 
+	@ManyToMany(mappedBy = "professores") 
+	private Set<Aluno> alunos = new HashSet<>();
 	
-	  @ManyToMany()
-	  @JoinTable(name = "tb_aluno_professor", 
-	  joinColumns = @JoinColumn(name ="aluno_id",referencedColumnName = "id"),
-	  inverseJoinColumns = @JoinColumn(name = "professor_id" ,referencedColumnName = "id"))
-	  private Set<Professor> professores = new HashSet<>();
-	 
-
-	public Aluno() {
+	public Professor() {
 		super();
 	}
 
-	public Aluno(Long id, String name) {
+	public Professor(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -61,6 +54,7 @@ public class Aluno implements Serializable {
 	}
 
 
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -74,7 +68,7 @@ public class Aluno implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Aluno other = (Aluno) obj;
+		Professor other = (Professor) obj;
 		return Objects.equals(id, other.id);
 	}
 
